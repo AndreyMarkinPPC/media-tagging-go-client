@@ -15,11 +15,11 @@ const (
 
 type Tag struct {
 	Name  string  `json:"name"`
-	Score float64 `json:""`
+	Score float64 `json:"score"`
 }
 
 type Description struct {
-	Text string `json:""`
+	Text string `json:"text"`
 }
 
 type TaggingResult struct {

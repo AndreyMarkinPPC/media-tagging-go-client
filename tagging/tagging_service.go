@@ -21,7 +21,10 @@ type MediaTaggingResponse struct {
 	Results []TaggingResult
 }
 
-func TagMedia(tagger Tagger, request MediaTaggingRequest) (MediaTaggingResponse, error) {
+func TagMedia(
+	tagger Tagger,
+	request MediaTaggingRequest,
+) (MediaTaggingResponse, error) {
 	data, err := media.FromPaths(request.MediaPaths, request.MediaType)
 	if err != nil {
 		return MediaTaggingResponse{}, err
@@ -33,7 +36,10 @@ func TagMedia(tagger Tagger, request MediaTaggingRequest) (MediaTaggingResponse,
 	return MediaTaggingResponse{Results: res}, nil
 }
 
-func DescribeMedia(tagger Tagger, request MediaTaggingRequest) (MediaTaggingResponse, error) {
+func DescribeMedia(
+	tagger Tagger,
+	request MediaTaggingRequest,
+) (MediaTaggingResponse, error) {
 	data, err := media.FromPaths(request.MediaPaths, request.MediaType)
 	if err != nil {
 		return MediaTaggingResponse{}, err

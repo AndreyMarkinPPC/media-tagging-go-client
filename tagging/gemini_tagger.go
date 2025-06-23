@@ -20,7 +20,7 @@ type GeminiTagger struct {
 	model  string
 }
 
-func New(model, apiKey string) (GeminiTagger, error) {
+func NewGeminiTagger(model, apiKey string) (GeminiTagger, error) {
 	if apiKey == "" {
 		apiKey = os.Getenv("GOOGLE_API_KEY")
 	}
@@ -57,7 +57,19 @@ func (t GeminiTagger) Describe(
 	media []media.Media,
 	options taggingOptions,
 ) ([]TaggingResult, error) {
-	return []TaggingResult{}, nil
+	ctx := context.Background()
+	client, err := t.client(ctx)
+	if err != nil {
+		log.Fatal(err)
+	}
+	results, err := t.processMedia(
+		ctx,
+		client,
+		media,
+		"image/jpeg",
+		PROMPT,
+	)
+	return results, err
 }
 
 func (t GeminiTagger) client(ctx context.Context) (*genai.Client, error) {

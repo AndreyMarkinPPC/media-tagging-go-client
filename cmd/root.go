@@ -1,5 +1,4 @@
-The MIT License (MIT)
-
+/*
 Copyright © 2025 Andrei Markin
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -19,3 +18,31 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
+*/
+package cmd
+
+import (
+	"os"
+
+	"github.com/spf13/cobra"
+)
+
+var rootCmd = &cobra.Command{
+	Use:     "media-tagger",
+	Short:   "Perform tagging of media via various taggers",
+	Version: "0.0.1",
+}
+
+func Execute() {
+	err := rootCmd.Execute()
+	if err != nil {
+		os.Exit(1)
+	}
+}
+
+func init() {
+	rootCmd.PersistentFlags().
+		StringP("tagger", "t", "gemini", "Type of media tagger.")
+	rootCmd.PersistentFlags().
+		StringP("media-type", "m", "image", "Type of media.")
+}
